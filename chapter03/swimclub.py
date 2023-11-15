@@ -23,7 +23,7 @@ def read_swim_data(filename):
     
     round(average/ 100, 2) #86.56, where 86 - seconds, 56 - hundredths
     
-    min_secs, hundredths = str(round(average / 100, 2)).split(".") # ['86', '58']
+    mins_secs, hundredths = str(round(average / 100, 2)).split(".") # ['86', '58']
     
     mins_secs = int(mins_secs)
     
