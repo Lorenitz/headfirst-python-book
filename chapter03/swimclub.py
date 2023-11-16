@@ -34,4 +34,4 @@ def read_swim_data(filename):
     
     #print(average)
     
-    return average, swimer, age, distance, stroke
+    return average, swimer, age, distance, stroke, times
