@@ -37,8 +37,6 @@ def read_swim_data(filename):
     minutes = mins_secs // 60
     seconds = mins_secs - minutes * 60
     
-    average = str(minutes) + ":" + str(seconds) + "." + hundredths
+    average = f"{minutes}:{seconds}.{hundredths}"
     
-    #print(average)
-    
-    return swimer, age, distance, stroke, average, times
+    return swimer, age, distance, stroke, times, average, converts
