@@ -15,6 +15,7 @@ def display_swimmers():
     
     for file in swim_files:
         name, *_  = swimclub.read_swim_data(file)
+        #To remove the duplicated ones
         if name not in swimmers:
             swimmers[name] = []
         swimmers[name].append(file)
