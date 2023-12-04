@@ -21,7 +21,15 @@ def display_swimmers():
         swimmers[name].append(file)
     #The result of this function are converted to a string 
     #before they are returned (just in case)    
-    return str(sorted(swimmers))      
+    return str(sorted(swimmers)) 
+
+
+@app.get("/files/<swimmers>")
+def get_swimmers_files(swimmer):
+    return str(swimmers[swimmer])    
+   
+app.run(debug=True)
         
 if __name__ == "__main__":
     app.run()
+    
