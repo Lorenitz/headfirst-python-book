@@ -4,7 +4,7 @@ import hfpy_utils
 CHARTS = "charts/"
 
 #Splitting the file name into variables
-FOLDER = "../swimdata/"
+FOLDER = "swimdata/"
 
 def read_swim_data(filename):
     swimer, age, distance, stroke = filename.removesuffix(".txt").split("-")
