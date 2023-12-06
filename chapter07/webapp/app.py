@@ -1,4 +1,4 @@
-from flask import Flask, session
+from flask import Flask, session, render_template
 import swimclub
 import os
 
@@ -36,6 +36,11 @@ def get_swimmers_files(swimmer):
     return str(session["swimmers"][swimmer])
    
 app.run(debug=True)
+
+
+@app.get("/")
+def index():
+    return render_template("index.txt")
         
 if __name__ == "__main__":
     app.run()
