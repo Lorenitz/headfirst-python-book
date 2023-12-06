@@ -6,6 +6,14 @@ app = Flask(__name__)
 app.secret_key = "You will never guess..."
 
 
+@app.get("/")
+def index():
+    return render_template(
+        "index.html",
+        title="Welcome to the Swimclub system",
+    )
+    
+
 #This function doesn't return anything
 def populate_data():
     #The if statements ensures the session is populated only when necessary
@@ -37,10 +45,6 @@ def get_swimmers_files(swimmer):
    
 app.run(debug=True)
 
-
-@app.get("/")
-def index():
-    return render_template("index.txt")
         
 if __name__ == "__main__":
     app.run()
