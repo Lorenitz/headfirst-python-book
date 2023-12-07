@@ -30,18 +30,37 @@ def populate_data():
             session["swimmers"][name].append(file)
             
 
-#The "/swimmers"URL responds to a HTTP GET Request.
+#The "/swimmers" URL responds to a HTTP GET Request.
 @app.get("/swimmers")
 #The function's signature.
 def display_swimmers():
     populate_data()
-    return str(sorted(session["swimmers"]))
+    return render_template(
+        "select.html",
+        title="Select a swimmer",
+        url="/showfiles",
+        select_id="swimmer",
+        data=sorted(session["swimmers"])
+        
+    )
 
 
 @app.get("/files/<swimmer>")
 def get_swimmers_files(swimmer):
     populate_data()
     return str(session["swimmers"][swimmer])
+   
+@app.post("/showfiles")
+def display_swimmer_files():
+    populate_data()
+    name = request.form["swimmer"]
+    return render_template (
+        "select.html",
+        title ="Select an event",
+        url="/showbarchart",
+        select_id="file",
+        data=session["swimmers"][name],
+    )   
    
 app.run(debug=True)
 
