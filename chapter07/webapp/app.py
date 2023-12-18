@@ -1,4 +1,4 @@
-from flask import Flask, session, render_template
+from flask import Flask, session, render_template, request
 import swimclub
 import os
 
@@ -62,9 +62,7 @@ def display_swimmer_files():
         data=session["swimmers"][name],
     )   
    
-app.run(debug=True)
-
-        
+           
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
     
