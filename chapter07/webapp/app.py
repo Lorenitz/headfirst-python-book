@@ -13,7 +13,6 @@ def index():
         title="Welcome to the Swimclub system",
     )
     
-
 #This function doesn't return anything
 def populate_data():
     #The if statements ensures the session is populated only when necessary
@@ -27,8 +26,7 @@ def populate_data():
             name, *_ = swimclub.read_swim_data(file)
             if name not in session["swimmers"]:
                 session["swimmers"][name] = []
-            session["swimmers"][name].append(file)
-            
+            session["swimmers"][name].append(file)         
 
 #The "/swimmers" URL responds to a HTTP GET Request.
 @app.get("/swimmers")
@@ -40,10 +38,8 @@ def display_swimmers():
         title="Select a swimmer",
         url="/showfiles",
         select_id="swimmer",
-        data=sorted(session["swimmers"])
-        
+        data=sorted(session["swimmers"]),   
     )
-
 
 @app.get("/files/<swimmer>")
 def get_swimmers_files(swimmer):
@@ -61,7 +57,12 @@ def display_swimmer_files():
         select_id="file",
         data=session["swimmers"][name],
     )   
-   
+
+@app.post("/showbarchart")
+def show_bar_chart():
+    file_id = request.form["file"]
+    location = swimclub.produce_bar_chart(file_id, "templates/")
+    return render_template(location.split("/")[-1])   
            
 if __name__ == "__main__":
     app.run(debug=True)

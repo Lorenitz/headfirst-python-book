@@ -47,7 +47,7 @@ def read_swim_data(filename):
     return swimer, age, distance, stroke, times, average, converts
 
 
-def produce_bar_chart(filename):
+def produce_bar_chart(filename, location=CHARTS):
     """
     Given the name of a swimmer's file, produce a HTML/SVG-based bar chart.
 
@@ -79,7 +79,7 @@ def produce_bar_chart(filename):
                     </html>"""
                     
     page = header + body + footer
-    save_to = f"{CHARTS}{filename.removesuffix('.txt')}.html"
+    save_to = f"{location}{filename.removesuffix('.txt')}.html"
     
     with open(save_to, "w") as sf:
         print(page, file=sf)
