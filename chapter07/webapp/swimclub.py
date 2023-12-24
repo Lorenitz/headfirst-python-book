@@ -1,5 +1,11 @@
 import statistics
 import hfpy_utils
+import os
+
+# Get directory relative to this python file
+# https://stackoverflow.com/a/5137509
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 
 CHARTS = "charts/"
 
@@ -10,7 +16,7 @@ def read_swim_data(filename):
     swimer, age, distance, stroke = filename.removesuffix(".txt").split("-")
 
     # Retrieving data from file
-    with open(FOLDER + filename) as file:
+    with open(dir_path + "/" + FOLDER + filename) as file:
         lines = file.readlines()
         # Remember, that strip remove the break line
         times = lines[0].strip().split(",")
@@ -79,7 +85,7 @@ def produce_bar_chart(filename, location=CHARTS):
                     </html>"""
                     
     page = header + body + footer
-    save_to = f"{location}{filename.removesuffix('.txt')}.html"
+    save_to = f"{dir_path}/{location}{filename.removesuffix('.txt')}.html"
     
     with open(save_to, "w") as sf:
         print(page, file=sf)
