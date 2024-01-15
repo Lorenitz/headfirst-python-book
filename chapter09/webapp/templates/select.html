@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+<form method="POST" action="{{ url }}">
+    <label for="{{ select_id }}"> Please select a {{ select_id }}:</label>
+
+    <select name="{{ select_id }}" id="{{ select_id }}">
+        {% for name in data %}
+            <option value="{{ name }}">{{ name.removesuffix(".txt").split("-", 2)[-1] }}</option>
+        {% endfor %}
+    </select>    
+        
+    <p>
+        <input type="submit" value="Select">
+    </p>    
+</form>    
+{% endblock %}
