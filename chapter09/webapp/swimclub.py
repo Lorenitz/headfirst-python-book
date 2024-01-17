@@ -13,7 +13,7 @@ CHARTS = "charts/"
 #Splitting the file name into variables
 FOLDER = "swimdata/"
 
-JSONDATA = "records.json"
+JSONDATA = "chapter09/webapp/records.json"
 
 def read_swim_data(filename):
     swimer, age, distance, stroke = filename.removesuffix(".txt").split("-")

@@ -2,7 +2,7 @@ import gazpacho
 import json
 
 URL = "https://en.wikipedia.org/wiki/List_of_world_records_in_swimming"
-RECORDS = (0,2,4,5)
+RECORDS = (0, 2 ,4, 5)
 COURSES = ("LC Men", "LC Women", "SC Men", "SC Women")
 
 #To adjust when running on Python Anywhere
