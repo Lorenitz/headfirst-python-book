@@ -1,12 +1,11 @@
 import DBcm
 
-db_details = "Coach.sqlite3"
+db_details = "CoachDB.sqlite3"
 
 import os
 
-FOLDER = '../../swimdata/'
+FOLDER = '../../swimdata'
 
-#grab the list of filenames from the swimdata folder
 files = os.listdir(FOLDER)
 files.remove(".DS_Store")
 
@@ -25,7 +24,7 @@ SQL_INSERT_SWIMMERS = """
 
 SQL_SELECT_EVENTS = """
     select * from events
-    where name = ? and age = ?
+    where distance = ? and stroke = ?
 """
 
 SQL_INSERT_EVENTS = """
@@ -40,7 +39,6 @@ SQL_GET_SWIMMER = """
     where name = ? and age = ?
 """
 
-
 SQL_GET_EVENT = """
     select id from events
     where distance = ? and stroke = ?
@@ -52,6 +50,7 @@ SQL_INSERT_TIMES = """
     values
     (?, ?, ?)
 """
+
 
 with DBcm.UseDatabase(db_details) as db:
     for fn in files:
