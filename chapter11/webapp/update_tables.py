@@ -4,7 +4,10 @@ db_details = "CoachDB.sqlite3"
 
 import os
 
-FOLDER = '../../swimdata'
+print("Working directory:" + os.getcwd())
+
+
+FOLDER = "swimdata/"
 
 files = os.listdir(FOLDER)
 files.remove(".DS_Store")
@@ -55,8 +58,9 @@ SQL_INSERT_TIMES = """
 with DBcm.UseDatabase(db_details) as db:
     for fn in files:
         name, age, distance, stroke = fn.removesuffix(".txt").split("-")
-
+       
         db.execute(
+           
             SQL_SELECT_SWIMMERS,
             (
                 name,
