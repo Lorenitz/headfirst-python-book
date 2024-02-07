@@ -1,6 +1,7 @@
 from flask import Flask, session, render_template, request
 import swimclub
 import os
+import data_utils
 
 app = Flask(__name__)
 app.secret_key = "You will never guess..."
@@ -28,18 +29,39 @@ def populate_data():
                 session["swimmers"][name] = []
             session["swimmers"][name].append(file)         
 
-#The "/swimmers" URL responds to a HTTP GET Request.
-@app.get("/swimmers")
-#The function's signature.
+
+@app.post("/swimmers")
 def display_swimmers():
-    populate_data()
+    #The line below does double-duty. It grabs the data sent from the HTML form, then saves it to Flask's session variable
+    session["chosen_date"] = request.form["chosen_date"]
+    data = data_utils.get_session_swimmers(session["chosen_date"])
+    swimmers = [f"{swimmer[0]}-{swimmer[1]}" for swimmer in data]
     return render_template(
         "select.html",
-        title="Select a swimmer",
+        title = "Select a swimmer",
         url="/showfiles",
         select_id="swimmer",
-        data=sorted(session["swimmers"]),   
+        data=sorted(swimmers),        
     )
+
+
+
+@app.get("/swims")
+def display_swim_sessions():
+    data = data_utils.get_swim_sessions()
+    dates = [session[0].split(" ")[0] for session in data]
+    return render_template(
+        "select.html",
+        title="Select a swim session",
+        url="/swimmers",
+        select_id="chosen_date",
+        data=dates,
+    )    
+
+
+
+
+
 
 @app.get("/files/<swimmer>")
 def get_swimmers_files(swimmer):
@@ -63,6 +85,19 @@ def show_bar_chart():
     file_id = request.form["file"]
     location = swimclub.produce_bar_chart(file_id, "templates/")
     return render_template(location.split("/")[-1])   
+
+
+
+
+
+
+
+
+
+
+
+
+
            
 if __name__ == "__main__":
     app.run(debug=True)
